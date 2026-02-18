@@ -98,7 +98,7 @@ export default function RegisterPage() {
             </span>
           </Link>
           <h1 className="text-2xl font-bold mt-6 mb-2">Create account</h1>
-          <p className="text-gray-400">Join the TitanSupps community</p>
+          <p className="text-gray-300">Join the TitanSupps community</p>
         </div>
 
         {/* Form Card */}
@@ -111,8 +111,10 @@ export default function RegisterPage() {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-semibold mb-2">Full name</label>
+              {/* Vinculado label con input id="name" */}
+              <label htmlFor="name" className="block text-sm font-semibold mb-2">Full name</label>
               <input
+                id="name"
                 type="text"
                 required
                 className="input"
@@ -129,8 +131,10 @@ export default function RegisterPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold mb-2">Email</label>
+              {/* Vinculado label con input id="email" */}
+              <label htmlFor="email" className="block text-sm font-semibold mb-2">Email</label>
               <input
+                id="email"
                 type="email"
                 required
                 className={`input ${emailError ? 'border-red-500 focus:border-red-500' : ''}`}
@@ -151,9 +155,11 @@ export default function RegisterPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold mb-2">Password</label>
+              {/* Vinculado label con input id="password" */}
+              <label htmlFor="password" className="block text-sm font-semibold mb-2">Password</label>
               <div className="relative">
                 <input
+                  id="password"
                   type={showPassword ? 'text' : 'password'}
                   required
                   className="input pr-12"
@@ -161,10 +167,12 @@ export default function RegisterPage() {
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 />
+                {/* Ojo mejorado con aria-label y área táctil grande (p-2) */}
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                  aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors p-2"
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
@@ -172,15 +180,28 @@ export default function RegisterPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold mb-2">Confirm password</label>
-              <input
-                type={showPassword ? 'text' : 'password'}
-                required
-                className="input"
-                placeholder="Repeat your password"
-                value={formData.confirmPassword}
-                onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-              />
+              {/* Vinculado label con input id="confirmPassword" */}
+              <label htmlFor="confirmPassword" className="block text-sm font-semibold mb-2">Confirm password</label>
+              <div className="relative">
+                <input
+                  id="confirmPassword"
+                  type={showPassword ? 'text' : 'password'}
+                  required
+                  className="input pr-12"
+                  placeholder="Repeat your password"
+                  value={formData.confirmPassword}
+                  onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                />
+                {/* Ojo extra para el confirm password (opcional, pero buena UX), con accesibilidad */}
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? "Ocultar contraseña de confirmación" : "Mostrar contraseña de confirmación"}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors p-2"
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
             </div>
 
             <Button
@@ -196,7 +217,7 @@ export default function RegisterPage() {
             </Button>
           </form>
 
-          <p className="text-center text-gray-400 mt-6 text-sm">
+          <p className="text-center text-gray-300 mt-6 text-sm">
             Already have an account?{' '}
             <Link href="/auth/login" className="text-neon font-semibold hover:underline">
               Sign in

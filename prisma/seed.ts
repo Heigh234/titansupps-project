@@ -34,7 +34,8 @@ await prisma.user.upsert({
     emailVerified: true,
   },
 })
-
+  await prisma.orderItem.deleteMany()
+  await prisma.order.deleteMany()
   // Create products
   await prisma.product.deleteMany()
   const products = await prisma.product.createMany({

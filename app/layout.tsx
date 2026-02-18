@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   description: 'Fuel your gains with premium supplements designed for champions.',
   keywords: ['supplements', 'protein', 'pre-workout', 'gym', 'fitness'],
   icons: {
-    icon: '/favicon.svg',
-    apple: '/favicon.svg',
+    icon: '/icon.svg',
+    apple: '/icon.svg',
   },
   openGraph: {
     title: 'TitanSupps - Premium Gym Supplements',

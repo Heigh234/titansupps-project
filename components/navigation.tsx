@@ -37,7 +37,7 @@ export function Navigation() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <Link href="/" className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center gap-2 group" aria-label="Ir al inicio">
             <div className="w-10 h-10 bg-neon rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
               <Dumbbell className="w-6 h-6 text-background" />
             </div>
@@ -48,14 +48,15 @@ export function Navigation() {
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href}
                 className={cn('text-sm font-semibold uppercase tracking-wider transition-colors hover:text-neon',
-                  pathname === link.href ? 'text-neon' : 'text-gray-400')}>
+                  pathname === link.href ? 'text-neon' : 'text-gray-300')}>
                 {link.label}
               </Link>
             ))}
           </div>
 
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="icon" onClick={handleCartClick} className="relative">
+            {/* Botón de carrito con aria-label */}
+            <Button variant="ghost" size="icon" onClick={handleCartClick} className="relative" aria-label="Abrir carrito de compras">
               <ShoppingCart className="w-6 h-6" />
               {totalItems > 0 && session && (
                 <span className="absolute -top-1 -right-1 w-5 h-5 bg-neon text-background text-xs font-bold rounded-full flex items-center justify-center">
@@ -68,6 +69,7 @@ export function Navigation() {
               {session ? (
                 <div className="relative">
                   <button onClick={() => setUserMenuOpen(!userMenuOpen)}
+                    aria-label="Abrir menú de usuario"
                     className="flex items-center gap-2 bg-card border border-border rounded-lg px-3 py-2 hover:border-neon/50 transition-all">
                     <div className="w-7 h-7 bg-neon rounded-full flex items-center justify-center">
                       {session.user.isAdmin
@@ -122,7 +124,8 @@ export function Navigation() {
               )}
             </div>
 
-            <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden">
+            {/* Botón de menú móvil con aria-label */}
+            <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden" aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}>
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </Button>
           </div>
@@ -135,7 +138,7 @@ export function Navigation() {
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href} onClick={() => setMobileMenuOpen(false)}
                 className={cn('block text-lg font-semibold uppercase tracking-wider transition-colors hover:text-neon',
-                  pathname === link.href ? 'text-neon' : 'text-gray-400')}>
+                  pathname === link.href ? 'text-neon' : 'text-gray-300')}>
                 {link.label}
               </Link>
             ))}

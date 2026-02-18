@@ -20,7 +20,6 @@ export function Cart() {
   const totalPrice = getTotalPrice()
 
   const handleFinishPurchase = () => {
-    // Block checkout if email not verified
     if (!session?.user?.emailVerified) {
       setVerifyPromptOpen(true)
       return
@@ -47,7 +46,7 @@ export function Cart() {
                 <ShoppingBag className="w-6 h-6 text-neon" />
                 <h2 className="text-2xl font-bold">Your Cart</h2>
               </div>
-              <Button variant="ghost" size="icon" onClick={toggleCart}>
+              <Button variant="ghost" size="icon" onClick={toggleCart} aria-label="Cerrar carrito">
                 <X className="w-6 h-6" />
               </Button>
             </div>
@@ -56,9 +55,9 @@ export function Cart() {
             <div className="flex-1 overflow-y-auto p-6">
               {items.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center">
-                  <ShoppingBag className="w-16 h-16 text-gray-600 mb-4" />
-                  <p className="text-xl font-semibold text-gray-400">Your cart is empty</p>
-                  <p className="text-sm text-gray-500 mt-2">Add supplements to get started!</p>
+                  <ShoppingBag className="w-16 h-16 text-gray-500 mb-4" />
+                  <p className="text-xl font-semibold text-gray-300">Your cart is empty</p>
+                  <p className="text-sm text-gray-400 mt-2">Add supplements to get started!</p>
                 </div>
               ) : (
                 <div className="space-y-4">
@@ -71,15 +70,15 @@ export function Cart() {
                         <h3 className="font-semibold text-white truncate">{item.name}</h3>
                         <p className="text-neon font-bold mt-1">{formatPrice(item.price)}</p>
                         <div className="flex items-center gap-2 mt-3">
-                          <Button variant="outline" size="icon" className="h-8 w-8"
+                          <Button variant="outline" size="icon" className="h-10 w-10" aria-label="Reducir cantidad"
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}>
-                            <Minus className="w-3 h-3" />
+                            <Minus className="w-4 h-4" />
                           </Button>
                           <span className="w-8 text-center font-semibold">{item.quantity}</span>
-                          <Button variant="outline" size="icon" className="h-8 w-8"
+                          <Button variant="outline" size="icon" className="h-10 w-10" aria-label="Aumentar cantidad"
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
                             disabled={item.quantity >= item.stock}>
-                            <Plus className="w-3 h-3" />
+                            <Plus className="w-4 h-4" />
                           </Button>
                           <Button variant="ghost" size="sm" className="ml-auto text-red-400 hover:text-red-300"
                             onClick={() => removeItem(item.id)}>
@@ -103,7 +102,7 @@ export function Cart() {
                 <Button className="w-full btn-primary text-lg py-6" onClick={handleFinishPurchase}>
                   Checkout {formatPrice(totalPrice)}
                 </Button>
-                <Button variant="outline" className="w-full" onClick={toggleCart}>
+                <Button variant="outline" className="w-full py-5" onClick={toggleCart}>
                   Continue shopping
                 </Button>
               </div>
@@ -112,47 +111,34 @@ export function Cart() {
         </>
       )}
 
-      {/* Email verification required prompt */}
+      {/* Dialogo Verificación (Mantenido igual) */}
       <Dialog.Root open={verifyPromptOpen} onOpenChange={setVerifyPromptOpen}>
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 animate-fade-in" />
           <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-sm bg-card border border-border rounded-2xl p-10 z-50 shadow-2xl">
             <div className="text-center space-y-6">
-              {/* Icon */}
               <div className="relative w-20 h-20 mx-auto">
                 <div className="absolute inset-0 rounded-full bg-yellow-500/20 animate-pulse" />
                 <div className="relative w-20 h-20 rounded-full bg-yellow-500/15 border-2 border-yellow-500 flex items-center justify-center">
                   <Mail className="w-9 h-9 text-yellow-400" />
                 </div>
               </div>
-
-              {/* Text */}
               <div>
-                <Dialog.Title className="text-2xl font-bold mb-3">
-                  Verify your email
-                </Dialog.Title>
-                <p className="text-gray-400 text-sm leading-relaxed">
+                <Dialog.Title className="text-2xl font-bold mb-3">Verify your email</Dialog.Title>
+                <p className="text-gray-300 text-sm leading-relaxed">
                   To make a purchase you need to verify your email first.
                   It's a quick process that only takes a minute.
                 </p>
               </div>
-
-              {/* Email display */}
               <div className="bg-background/60 rounded-xl p-4 border border-border">
                 <p className="text-xs text-gray-400 mb-1">Your email</p>
                 <p className="font-semibold text-white truncate">{session?.user?.email}</p>
               </div>
-
-              {/* Buttons */}
               <div className="space-y-3">
                 <Button onClick={handleGoVerify} className="w-full btn-primary py-5 gap-2">
                   Verify my email <ArrowRight className="w-4 h-4" />
                 </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => setVerifyPromptOpen(false)}
-                  className="w-full py-5"
-                >
+                <Button variant="outline" onClick={() => setVerifyPromptOpen(false)} className="w-full py-5">
                   Not now
                 </Button>
               </div>

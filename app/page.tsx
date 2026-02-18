@@ -4,7 +4,7 @@ import { ProductCard } from '@/components/products/product-card'
 import { Button } from '@/components/ui/button'
 import { Dumbbell, Zap, Shield, TrendingUp } from 'lucide-react'
 
-export const revalidate = 60 // Revalidate every 60 seconds
+export const revalidate = 60
 
 async function getFeaturedProducts() {
   const products = await prisma.product.findMany({
@@ -22,7 +22,6 @@ export default async function HomePage() {
     <main className="min-h-screen">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-        {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 -left-20 w-96 h-96 bg-neon/10 rounded-full blur-[120px] animate-pulse" />
           <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-neon/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
@@ -35,7 +34,7 @@ export default async function HomePage() {
               <br />
               <span className="text-gradient">GAINS</span>
             </h1>
-            <p className="text-lg sm:text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
               Premium supplements engineered for champions. Maximum performance, zero compromise.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -52,7 +51,6 @@ export default async function HomePage() {
             </div>
           </div>
 
-          {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 animate-slide-up" style={{ animationDelay: '0.3s' }}>
             {[
               { icon: Dumbbell, label: '50K+', sublabel: 'Athletes' },
@@ -63,7 +61,7 @@ export default async function HomePage() {
               <div key={i} className="glass rounded-xl p-6 hover:border-neon/50 transition-all duration-300">
                 <stat.icon className="w-8 h-8 text-neon mx-auto mb-3" />
                 <div className="text-3xl font-bold text-white mb-1">{stat.label}</div>
-                <div className="text-sm text-gray-400 uppercase tracking-wider">{stat.sublabel}</div>
+                <div className="text-sm text-gray-300 uppercase tracking-wider">{stat.sublabel}</div>
               </div>
             ))}
           </div>
@@ -77,7 +75,7 @@ export default async function HomePage() {
             <h2 className="text-5xl sm:text-6xl font-black mb-4">
               FEATURED <span className="text-neon">PRODUCTS</span>
             </h2>
-            <p className="text-xl text-gray-400">
+            <p className="text-xl text-gray-300">
               Our most popular supplements trusted by champions
             </p>
           </div>
@@ -136,7 +134,7 @@ export default async function HomePage() {
                   <feature.icon className="w-8 h-8 text-neon" />
                 </div>
                 <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
-                <p className="text-gray-400">{feature.description}</p>
+                <p className="text-gray-300">{feature.description}</p>
               </div>
             ))}
           </div>

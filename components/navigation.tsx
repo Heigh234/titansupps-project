@@ -87,25 +87,31 @@ export function Navigation() {
                         <div className="px-4 py-3 border-b border-border">
                           <p className="text-xs text-gray-400">Signed in as</p>
                           <p className="text-sm font-semibold truncate">{session.user.email}</p>
+                          
+                          {/* Lógica de administrador y verificación actualizada */}
                           <div className="flex items-center gap-2 mt-1 flex-wrap">
-                            {session.user.isAdmin && (
+                            {session.user.isAdmin ? (
                               <span className="inline-block px-2 py-0.5 bg-neon/20 border border-neon/40 rounded text-neon text-xs font-bold">
                                 ADMIN
                               </span>
-                            )}
-                            {session.user.emailVerified ? (
-                              <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-green-500/20 border border-green-500/40 rounded text-green-400 text-xs font-semibold">
-                                <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                                </svg>
-                                Email verified
-                              </span>
-                            ) : !session.user.isAdmin && (
-                              <a href="/auth/verify" className="inline-flex items-center gap-1 px-2 py-0.5 bg-yellow-500/20 border border-yellow-500/40 rounded text-yellow-400 text-xs font-semibold hover:bg-yellow-500/30 transition-colors">
-                                ⚠ Verify email
-                              </a>
+                            ) : (
+                              <>
+                                {session.user.emailVerified ? (
+                                  <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-green-500/20 border border-green-500/40 rounded text-green-400 text-xs font-semibold">
+                                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    Email verified
+                                  </span>
+                                ) : (
+                                  <a href="/auth/verify" className="inline-flex items-center gap-1 px-2 py-0.5 bg-yellow-500/20 border border-yellow-500/40 rounded text-yellow-400 text-xs font-semibold hover:bg-yellow-500/30 transition-colors">
+                                    ⚠ Verify email
+                                  </a>
+                                )}
+                              </>
                             )}
                           </div>
+                          
                         </div>
                         <button onClick={() => { signOut({ callbackUrl: '/' }); setUserMenuOpen(false) }}
                           className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-400 hover:bg-red-500/10 transition-colors">

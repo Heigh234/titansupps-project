@@ -66,7 +66,7 @@ export default function NewPasswordPage() {
           </div>
           <div>
             <h1 className="text-3xl font-black mb-2">Password updated!</h1>
-            <p className="text-gray-400">Your password was changed successfully.<br />Redirecting to login...</p>
+            <p className="text-gray-300">Your password was changed successfully.<br />Redirecting to login...</p>
           </div>
         </div>
       </main>
@@ -91,7 +91,7 @@ export default function NewPasswordPage() {
             </span>
           </Link>
           <h1 className="text-2xl font-bold mt-6 mb-2">Create your new password</h1>
-          <p className="text-gray-400 text-sm">
+          <p className="text-gray-300 text-sm">
             Choose a strong password for your account
           </p>
         </div>
@@ -105,9 +105,10 @@ export default function NewPasswordPage() {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-semibold mb-2">New password</label>
+              <label htmlFor="newPassword" className="block text-sm font-semibold mb-2">New password</label>
               <div className="relative">
                 <input
+                  id="newPassword"
                   type={showPassword ? 'text' : 'password'}
                   required
                   className="input pr-12"
@@ -118,7 +119,8 @@ export default function NewPasswordPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                  aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors p-2"
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
@@ -126,15 +128,26 @@ export default function NewPasswordPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold mb-2">Repeat password</label>
-              <input
-                type={showPassword ? 'text' : 'password'}
-                required
-                className="input"
-                placeholder="Repeat your new password"
-                value={confirmPassword}
-                onChange={e => setConfirmPassword(e.target.value)}
-              />
+              <label htmlFor="confirmPassword" className="block text-sm font-semibold mb-2">Repeat password</label>
+              <div className="relative">
+                <input
+                  id="confirmPassword"
+                  type={showPassword ? 'text' : 'password'}
+                  required
+                  className="input pr-12"
+                  placeholder="Repeat your new password"
+                  value={confirmPassword}
+                  onChange={e => setConfirmPassword(e.target.value)}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? "Ocultar confirmación de contraseña" : "Mostrar confirmación de contraseña"}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors p-2"
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
             </div>
 
             <Button
@@ -152,7 +165,7 @@ export default function NewPasswordPage() {
 
           <Link
             href="/auth/reset-password"
-            className="flex items-center justify-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+            className="flex items-center justify-center gap-2 text-sm text-gray-300 hover:text-white transition-colors"
           >
             <ArrowLeft className="w-4 h-4" /> Back
           </Link>

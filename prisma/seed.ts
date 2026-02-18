@@ -17,9 +17,6 @@ async function main() {
     throw new Error('❌ Faltan ADMIN_EMAIL o ADMIN_PASSWORD en el archivo .env')
   }
 
-  const hashedPassword = await bcrypt.hash(adminPassword, 12)
-  // ... el resto del código sigue exactamente igual ...
-
 const hashedPassword = await bcrypt.hash(adminPassword, 12)
 await prisma.user.upsert({
   where: { email: adminEmail },

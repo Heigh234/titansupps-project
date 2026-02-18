@@ -7,9 +7,18 @@ async function main() {
   console.log('🚀 Starting seed...')
 
   // CHANGE THESE TO YOUR REAL CREDENTIALS
-const adminEmail = 'villalobosdarwin050@gmail.com'  // ← YOUR EMAIL
-const adminPassword = '@Darwin07.'   // ← YOUR STRONG PASSWORD
-const adminName = 'Heighwein'                    // ← YOUR NAME
+// Leer credenciales del archivo .env
+  const adminEmail = process.env.ADMIN_EMAIL
+  const adminPassword = process.env.ADMIN_PASSWORD
+  const adminName = process.env.ADMIN_NAME || 'Admin' // Nombre por defecto si no lo pones
+
+  // Validar que las variables existan para evitar errores
+  if (!adminEmail || !adminPassword) {
+    throw new Error('❌ Faltan ADMIN_EMAIL o ADMIN_PASSWORD en el archivo .env')
+  }
+
+  const hashedPassword = await bcrypt.hash(adminPassword, 12)
+  // ... el resto del código sigue exactamente igual ...
 
 const hashedPassword = await bcrypt.hash(adminPassword, 12)
 await prisma.user.upsert({

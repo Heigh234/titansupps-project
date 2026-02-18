@@ -34,3 +34,12 @@ yarn-error.log*
 next-env.d.ts
 
 # prisma
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
